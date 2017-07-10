@@ -1,0 +1,60 @@
+<div class="view">
+    <div class="quizCont">
+        <div class="quizHeader">
+            <div style="{{display}}" class="quizCenter">
+                <ul>
+                    <li>
+                        <h2>Which deck would you like to study: </h2>
+                    </li>
+                    <li>
+                        <div class="deckSelect">
+                            <select name="repeatSelect" id="repeatSelect" ng-model="singleSelect" ng-change="startStudy(); onTimeout()">
+                                    <option value="">--Please Select A Deck--</option> <!-- not selected /  -->
+                                    <option ng-repeat="option in notes" value="{{option.postId}}">{{option.deckName}}</option>
+                                </select>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="{{studyOn}}" class="quizCenter">
+                <ul>
+                    <li>
+                        <h2>Studing:</h2>
+                    </li>
+                    <li>
+                        <div class="deckSelect">
+                            <h2>{{ deckName }}</h1>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="deckSelect">
+                            <button id="endSession" ng-click="endStudy()" class="btn">End Quiz</button>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="deckTimer">
+                            <span>Session Timer: {{ counter|timerFilter }} </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="quizScreen">
+            <p>{{definition}}</p>
+        </div>
+        <div class="testScore">
+            <ul>
+                <li class="scoreDisplay"><span class="digits"><strong>Total: </strong> {{ questionTotal }} </span></li>
+                <li class="scoreDisplay"><span class="digits"><strong>Correct: </strong> {{ answerCorrect }}</span></li>
+                <li class="scoreDisplay"><span class="digits"><strong>Wrong: </strong> {{ answerWrong }}</span></li>
+                <li class="scoreDisplay"><span class="digits"><strong>Deck Size: </strong> {{ deckSize }} </span></li>
+            </ul>
+        </div>
+        <div class="choiceBar">
+            <ul>
+                <li ng-repeat="option in keyWords" class="choiceItem"><button id="choice{{option.id}}" ng-click="checkAnswer(option.id)" ;>{{option.keyword}}</button></li>
+            </ul>
+
+        </div>
+    </div>
+</div>

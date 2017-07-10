@@ -1,0 +1,36 @@
+<div class="view">
+  <div class="">
+    <div class="">
+      <div class="note-section" ng-class="{'col-xs-6': showCol}" style="{{noteCol}}">
+        <div class="text-center noteHeader">
+          <h1>Notes:</h1>
+          <button ng-click="minimize()" class="btn btn-success">Hide</button>
+          <button ng-click="maximize()" class="btn btn-info">Show</button>
+        </div>
+        <div class="format row">
+          <ul ng-repeat="key in notes">
+            <li>
+              {{key.note}}
+              <p style="font-size:10px">
+                <Strong> {{key.postedBy}} </strong> {{ key.postedOn}}
+              </p>
+              <button class="delete" ng-click="deleteButton(key.postId)">Delete </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="keyWord animated fadeIn" style="{{keyWord}} {{keyWordCol}}">
+        <div class="text-center noteHeader">
+          <h1>Keywords:</h1>
+        </div>
+        <div class="row format">
+          <div class="row">
+            <span class="vocab">Word :</span>
+          </div>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur laboriosam ratione qui modi ipsum ducimus,
+            maiores expedita ad saepe odio, tenetur doloremque error aliquam! Distinctio labore sapiente incidunt quo adipisci.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

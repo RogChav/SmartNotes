@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="noteApp">
+
+<head>
+  <meta charset="UTF-8">
+  <title>SmartNotes</title>
+  <meta name="viewport" content="width=device-width, maximum-scale=1">
+  <!-- Google Font - Open Sans -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+
+  <!-- Google Font - Merienda One -->
+  <link href="https://fonts.googleapis.com/css?family=Merienda+One" rel="stylesheet">
+
+  <!-- Bootstrap CDN 3.3.7 -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/animate.css">
+
+  <!-- Angular CDN 1.5.7 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js"></script>
+
+  <!-- Angular UI Router CDN 0.4.2 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+  <link rel="icon" href="./images/Favicon.png" />
+
+  <!-- jQuery CDN 3.2.1 -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <!--Chart.js CDN-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+  <!--angular chart cdn-->
+  <script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
+</head>
+
+<body ng-cloak>
+
+  <div class="row topbar">
+    <div class="green col-xs-2">
+      <a class="green" ui-sref="home"><span >Menu</span></a>
+    </div>
+    <div class="lightgreen col-xs-7">
+      <h1 class="lightgreen"><span>Note And Study</span></h1>
+    </div>
+    <div class="yellow col-xs-3">
+      <a class="yellow" ui-sref="newUser"><span>Sign In / Register</span></a>
+    </div>
+    </div>
+  </div>
+  <div class="row naviBar">
+    <ul>
+      <li class="listItem col-xs-2"><button ui-sref="home">Home</button></li>
+      <li class="listItem col-xs-2"><button ui-sref="notes"><span>Notes</span></button></li>
+      <li class="listItem col-xs-2 "><button ui-sref="deck"><span>Study Deck</span></button></li>
+      <li class="listItem col-xs-2"><button ui-sref="quiz"><span>Quiz</span></button></li>
+      <li class="listItem col-xs-2"><button ui-sref="data"><span>Your Data</span></button></li>
+      <li class="listItem col-xs-2"><button ui-sref="#"><span>Logout</span></button></li>
+    </ul>
+  </div>
+<!--
+  <div class="test row">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
+    <ul class= "col-xs-2 testBar">
+      <li class=""><a href="#"><span>Icon Here</span></a></li>
+      <li class=""><a href="#"><span>Notes</span></a></li>
+      <li class=" "><a href="#"><span>Study Deck</span></a></li>
+      <li class=" "><a href="#"><span>Quiz</span></a></li>
+      <li class=""><a href="#"><span>Your Data</span></a></li>
+      <li class=""><a href="#"><span>Logout</span></a></li>
+    </ul>
+    <div class="col-xs-2"></div>
+    <div class="col-xs-2"></div>
+  </div>-->
+
+  <!--features > Smart notes- take notes and we'll help you segregate keypoint and vocabulary as you go you can review and quiz on the note cards whenever you'd like and you're learning progress is tracked so that you can optimize your study time and learn more efficiently. -->
+  <div ui-view></div>
+
+  <!-- Module -->
+  <script type="text/javascript" src="./app.js"></script>
+  <!-- Filters -->
+   <script type="text/javascript" src="./filters/timerFilter.js"></script>
+  <!--Services -->
+  <script type="text/javascript" src="./services/noteService.js"></script>
+  <script type="text/javascript" src="./services/dataService.js"></script>
+  <!-- Controllers -->
+  <script type="text/javascript" src="./controllers/noteController.js"></script>
+  <script type="text/javascript" src="./controllers/dataController.js"></script>
+  <script type="text/javascript" src="./controllers/deckController.js"></script>
+  <script type="text/javascript" src="./controllers/homeController.js"></script>
+  <script type="text/javascript" src="./controllers/quizController.js"></script>
+</body>
+
+</html>
