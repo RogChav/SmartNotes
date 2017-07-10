@@ -4,7 +4,7 @@ angular
 
         //** Get
         this.getUserNotes = function () {
-            return $http.get('http://localhost:8080/notes');       
+            return $http.get('http://localhost:8080/notes');
         }
-        
+
     })

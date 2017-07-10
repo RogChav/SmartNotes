@@ -1,7 +1,7 @@
 angular
     .module('noteApp')
     .controller('quizController', function ($scope, $timeout, noteService) {
-        // below is the code for my timer is for my timer
+        // below is the code for my timer
         $scope.counter = 0;
         $scope.onTimeout = function () {
             $scope.counter++;
@@ -12,7 +12,6 @@ angular
             $timeout.cancel(mytimeout);
         }
         $scope.stopTimeout();
-
         // this displays the select header bar and hides it after a deck is chosen
         $scope.display = "display:inherit";
         // key that displays a bar that displays which deck is currently being studied
@@ -41,11 +40,11 @@ angular
         $scope.cardName = [];
         // this scope will be able to tell if a person got a question wrong
         $scope.notWrong = true;
-
         // this is where the deck object  is retrieved from the noteService, which get's it from my nodeserver 
         noteService.getUserNotes()
             .then(function (response) {
                 $scope.notes = response.data.usersNotes;
+                console.log($scope.notes);
                 $scope.startStudy = function () {
                     // hide/show display
                     $scope.display = "display:none";
@@ -126,7 +125,6 @@ angular
                     var hours = Math.floor((input / 60) / 60);
                     return (z(hours) + ':' + z(minutes) + ':' + z(seconds));
                 };
-
                 $scope.endStudy = function () {
                     // stop timeout timer
                     $scope.stopTimeout();
@@ -164,7 +162,6 @@ angular
                     //resets timer to 0
                     $scope.counter = 0;
                 }
-
                 $scope.checkAnswer = function (id) {
                     if (id == questionID) {
                         if ($scope.notWrong == true) {

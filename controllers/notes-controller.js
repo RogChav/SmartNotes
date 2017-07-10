@@ -19,20 +19,10 @@ function Keyword(id, keyword, definition) {
 }
 
 Note.prototype.postTime = function () {
-    var hour = new Date().getHours()
-    var minutes = new Date().getMinutes()
-    if (hour >= 12) {
-        hour -= 12;
-        minutes += " PM";
-    }
-    else {
-        minutes += " AM";
-    }
-    if (minutes < 10) {
-        minutes = "0" + minutes;
-    }
-    var concat = hour + ":" + minutes;
-    return concat;
+    function z(n) { return (n < 10 ? "0" : "") + n; }
+    var hour = new Date().getHours();
+    var minutes = new Date().getMinutes();
+    return z(hour) + ":" + z(minutes);
 }
 
 Note.prototype.postDate = function () {
@@ -90,7 +80,7 @@ function show(req, res, next) {
     }
     res.json({ error: "Sorry notes for that user do not exist." });
 }
-//PUT
+//PUT KEYWORD
 function update(req, res, next) {
     for (var i = 0; i < notes.length; i++) {
         if (notes[i].postId == req.params.id) {
@@ -122,7 +112,7 @@ function destroyKeyword(req, res, next) {
             }
         }
     }
-        res.json({ error: "Sorry there was an error, please check your notes id and your keyword id." });
+    res.json({ error: "Sorry there was an error, please check your notes id and your keyword id." });
 }
 
 module.exports = {

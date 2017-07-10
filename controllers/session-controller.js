@@ -1,8 +1,7 @@
 sessions = [];
 sessionID = null;
+// write a similar incrementing if statement as the front end, only use the prototype to push if the id doesn't already exist (or push all the cards in the the rests array at some point and increment right and wrong answers as you go), increment by boolean like front end; 
 
-
-// write a similar incementing if statement as the front end, only use the prototype to push if the id doesn't already exist (or push all the cards in the the rests array at some point and increment right and wrong answers as you go), increment by boolean like front end 
 function Session(id, deckId, deckName, name) {
     this.id = id;
     this.deckIDTested = deckId;
@@ -50,10 +49,6 @@ Session.prototype.localTime = function () {
     else {
         minutes += " AM";
     }
-    if (minutes < 10) {
-        minutes = minutes.toString();
-        minutes = "0" + minutes;
-    }
     return z(hour) + ":" + z(minutes);
 }
 
@@ -65,11 +60,23 @@ Session.prototype.postDate = function () {
     return concat
 }
 
-// get hours in military time and multiply by 60, add to minutes and there's my start time. 
-sessions.push(new Session(sessionID++,0, "Deck #1", "first session"))
-// start time would be when the object was created within angular, end time would be when it's posted here so it would be generated on creation within the server db. Put it in terms of minutes, so 1am would be 60, 10am 600 etc.
+// seeding my database
+sessions.push(new Session(sessionID++, 0, "Deck #1", "First session"));
+// sessions.push(new Session(sessionID++, 0, "Deck #1", "Second session"));
+// sessions.push(new Session(sessionID++, 0, "Deck #1", "Third session"));
+// sessions.push(new Session(sessionID++, 0, "Deck #1", "Fourth session"));
+// sessions.push(new Session(sessionID++, 0, "Deck #1", "Fifth session"));
+
 sessions[0].newResult(1, "keyword", 5, 6);
-// sessions[0].newName("test name method")
+sessions[0].newResult(1, "keyword 1", 4, 7);
+sessions[0].newResult(1, "keyword 2", 8, 3);
+sessions[0].newResult(1, "keyword 3", 9, 2);
+sessions[0].newResult(1, "keyword 4", 2, 9);
+sessions[0].newResult(1, "keyword 5", 6, 5);
+sessions[0].newResult(1, "keyword 6", 11, 0);
+sessions[0].newResult(1, "keyword 7", 5, 6);
+sessions[0].newResult(1, "keyword 8", 4, 7);
+
 
 //GET
 function index(req, res, next) {
@@ -78,8 +85,9 @@ function index(req, res, next) {
 
 //POST
 function create(req, res, next) {
+    console.log("this create path got hit")
     sessions.push(new Session(sessionID++, req.body.deckId, req.body.deckName, req.body.name));
-    res.json({ sessionID: sessions[sessions.length-1].id });
+    res.json({ sessionID: sessions[sessions.length - 1] });
 }
 
 //GET
@@ -100,21 +108,28 @@ function updateName(req, res, next) {
             res.json({ Session: sessions[i] });
         }
     }
-    res.json({ error: "Sorry you can't edit sessions." });
+    res.json({ error: "error, please double check your input." });
 }
-
 //PUT Results
 function update(req, res, next) {
     for (var i = 0; i < sessions.length; i++) {
         if (sessions[i].id == req.params.id) {
             sessions[i].newResult(req.body.id, req.body.keyword, req.body.correct, req.body.wrong);
-            sessions[i].setDuration(req.body.duration);
-            res.json({ Session: sessions[i] });
+            res.json({ Session: sessions });
         }
     }
     res.json({ error: "error, please double check your input." });
 }
-
+// PUT FINISHED SESSION - Duration
+function updateDuration(req, res, next) {
+    for (var i = 0; i < sessions.length; i++) {
+        if (sessions[i].id == req.params.id) {
+            sessions[i].setDuration(req.body.duration);
+            res.json({ Session: sessions });
+        }
+    }
+    res.json({ error: "error, please double check your input." });
+}
 //DELETE
 function destroy(req, res, next) {
     for (var i = 0; i < sessions.length; i++) {
@@ -131,6 +146,7 @@ module.exports = {
     create: create,
     show: show,
     updateName: updateName,
+    updateDuration: updateDuration,
     update: update,
     destroy: destroy
 }

@@ -15,6 +15,9 @@ router.get('/:id', sessionController.show);
 //PUT NAME
 router.put('/name/:id', sessionController.updateName); 
 
+//PUT DURATION
+router.put('/duration/:id', sessionController.updateDuration); 
+
 //PUT RESULTS
 router.put('/:id', sessionController.update);
 

@@ -2,8 +2,7 @@ angular
   .module("noteApp")
   .controller("noteController", function ($scope, noteService) {
 
-$scope.test = "test"; 
-
+    $scope.test = "test";
 
     $scope.keyWord = "display: inherit;"
     $scope.noteCol = "width:58%"
@@ -45,11 +44,11 @@ $scope.test = "test";
     $scope.postedBy = "";
     $scope.postedOn = "";
 
-        noteService.getUserNotes()
-            .then(function (response) {
-                $scope.notes = response.data.usersNotes;
+    // noteService.getUserNotes()
+    //   .then(function (response) {
+    //     $scope.notes = response.data.usersNotes;
 
-            });
+    //   });
 
     //** Get
     // $scope.getUserNotes = function () {
@@ -113,6 +112,5 @@ $scope.test = "test";
     //       $scope.getUserNotes();
     //     })
     // }
-
 
   });
