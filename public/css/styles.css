@@ -381,3 +381,40 @@ border-bottom: 8px solid black;
   background: #FFc0c0;
   font-weight: 600;
 }
+
+.defInput {
+  float: right;
+  height: 50px;
+  width: 50%;
+  box-sizing: border-box;
+  margin: auto;
+
+}
+
+.keywordListDef {
+  margin: auto;
+  display: flex;
+  align-items: center
+}
+
+.defButton {
+
+  margin-right: 5px;
+  display: inline-flex;
+  align-items: right;
+  float: right;
+}
+
+.keywordWell {
+  height: 130px;
+}
+
+.hideOrShow {
+
+  display:inline;
+  right:0;
+}
+
+.inlineDiv {
+  display: inline;
+}
