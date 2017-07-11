@@ -2,14 +2,14 @@ var notes = [];
 var noteID = null;
 var keywordID = null;
 
-function Note(id, firstName, lastName, input, deckName) {
+function Note(id, firstName, lastName, note, deckName, kw) {
     this.postId = id;
     this.postedBy = firstName + " " + lastName;
     this.postedDate = this.postDate();
     this.postedTime = this.postTime();
-    this.note = input;
-    this.deckName = "Deck " + "#" + (this.postId + 1) || deckName;
-    this.keywords = [];
+    this.note = note;
+    this.deckName = deckName || "Deck " + "#" + (this.postId + 1);
+    this.keywords = kw ? kw : [];
 }
 
 function Keyword(id, keyword, definition) {
@@ -66,64 +66,78 @@ function index(req, res, next) {
 
 //POST
 function create(req, res, next) {
-    for (var i = 0; i < notes.length; i++) {
-        if (notes[i].id == req.params.id) {
-            var tempUserNote = req.body.note;
-            notes[i].pushNote(tempUserNote);
-            res.json({ newNote: tempUserNote });
-        }
-    }
+    var tempUserNote = req.body.note;
+    // notes.push(tempUserNote);
+    notes.push(new Note(noteID++, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName, req.body.keywords));
+    res.json({ note: notes });
 }
 
-//GET
-function show(req, res, next) {
-    for (var i = 0; i < notes.length; i++) {
-        if (notes[i].postId == req.params.id) {
-            res.json({ notes: notes[i] })
-        }
-    }
-    res.json({ error: "Sorry notes for that user do not exist." });
-}
-//PUT KEYWORD
 function update(req, res, next) {
     for (var i = 0; i < notes.length; i++) {
         if (notes[i].postId == req.params.id) {
-            notes[i].addKeyword(keywordID++, req.body.keyword, req.body.definition);
-            res.json({ Session: notes[i] });
+            notes.splice(i, 1, new Note(req.params.id, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName, req.body.keywords));
+            res.json({ note: notes });
         }
     }
-    res.json({ error: "Sorry those notes do not exist." });
-}
-//DELETE NOTES
-function destroy(req, res, next) {
-    for (var i = 0; i < notes.length; i++) {
-        if (notes[i].postId == req.params.id) {
-            notes.splice(i, 1);
-            res.json({ user: notes });
-        }
-    }
-    res.json({ error: "Sorry those notes don't exist." });
-}
-//DELETE KEYWORDS
-function destroyKeyword(req, res, next) {
-    for (var i = 0; i < notes.length; i++) {
-        if (notes[i].postId == req.params.id) {
-            for (var j = 0; j < notes[i].keywords.length; j++) {
-                if (notes[i].keywords[j].id == req.params.id2) {
-                    notes[i].keywords.splice(j, 1);
-                    res.json({ user: notes[i].keywords });
-                }
-            }
-        }
-    }
-    res.json({ error: "Sorry there was an error, please check your notes id and your keyword id." });
 }
 
-module.exports = {
-    index: index,
-    create: create,
-    show: show,
-    update: update,
-    destroy: destroy,
-    destroyKeyword: destroyKeyword
-}
+        //GET
+        function show(req, res, next) {
+            for (var i = 0; i < notes.length; i++) {
+                if (notes[i].postId == req.params.id) {
+                    res.json({ notes: notes[i] })
+                }
+            }
+            res.json({ error: "Sorry notes for that user do not exist." });
+        }
+        //PUT
+        function updateKeywords(req, res, next) {
+
+            
+            // for (var i = 0; i < notes.length; i++) {
+            //     if (notes[i].postId == req.params.id) {
+            //         for (var j = 0; j < keywords.length; j++) {
+            //             if (notes[i].keywords[j].id == )
+            //         }
+            //         notes[i].addKeyword(keywordID++, req.body.keyword, req.body.definition);
+            //         res.json({ Session: notes[i] });
+            //     }
+            // }
+            // res.json({ error: "Sorry those notes do not exist." });
+        }
+
+
+        //DELETE NOTES
+        function destroy(req, res, next) {
+            for (var i = 0; i < notes.length; i++) {
+                if (notes[i].postId == req.params.id) {
+                    notes.splice(i, 1);
+                    res.json({ user: notes });
+                }
+            }
+            res.json({ error: "Sorry those notes don't exist." });
+        }
+        //DELETE KEYWORDS
+        function destroyKeyword(req, res, next) {
+            for (var i = 0; i < notes.length; i++) {
+                if (notes[i].postId == req.params.id) {
+                    for (var j = 0; j < notes[i].keywords.length; j++) {
+                        if (notes[i].keywords[j].id == req.params.id2) {
+                            notes[i].keywords.splice(j, 1);
+                            res.json({ user: notes[i].keywords });
+                        }
+                    }
+                }
+            }
+            res.json({ error: "Sorry there was an error, please check your notes id and your keyword id." });
+        }
+
+        module.exports = {
+            index: index,
+            create: create,
+            show: show,
+            update: update,
+            destroy: destroy,
+            destroyKeyword: destroyKeyword,
+            updateKeywords: updateKeywords
+        }
