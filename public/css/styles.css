@@ -106,7 +106,7 @@
   /*background: whitesmoke;*/
 }
 .active {
-  border-bottom: 2px solid #959595 !important;;
+color:white !important;
 }
 .testBar > li{
   text-decoration: none;
@@ -380,4 +380,11 @@ border-bottom: 8px solid black;
 #endSession:hover{
   background: #FFc0c0;
   font-weight: 600;
+}
+.dataCard{
+  background: yellow;
+  width: 250px;
+  height: 100%;
+  text-align: center;
+  float: left;
 }

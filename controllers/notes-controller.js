@@ -22,6 +22,9 @@ Note.prototype.postTime = function () {
     function z(n) { return (n < 10 ? "0" : "") + n; }
     var hour = new Date().getHours();
     var minutes = new Date().getMinutes();
+    if (hour >= 12) {
+        hour -= 12;
+    }
     return z(hour) + ":" + z(minutes);
 }
 
@@ -47,6 +50,7 @@ notes[0].addKeyword(keywordID++, "testing 2", "Definition of the keyword 2.");
 notes[0].addKeyword(keywordID++, "testing 3", "Definition of the keyword 3.");
 notes[0].addKeyword(keywordID++, "testing 4", "Definition of the keyword 4.");
 notes[0].addKeyword(keywordID++, "testing 5", "Definition of the keyword 5.");
+
 
 notes[1].addKeyword(keywordID++, "testing 6", "Definition of the keyword 6.");
 notes[1].addKeyword(keywordID++, "testing 7", "Definition of the keyword 7.");
