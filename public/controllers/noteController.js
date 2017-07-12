@@ -2,7 +2,44 @@ angular
   .module("noteApp")
   .controller("noteController", function ($scope, noteService, $http) {
 
-$scope.test = "test"; 
+    $scope.notes = "";
+    // This is the value of my select select element, it will change to whichever option I choose
+    $scope.singleSelect = "";
+
+    noteService.getUserNotes()
+      .then(function (response) {
+        $scope.notes = response.data.usersNotes;
+        console.log($scope.notes)
+      });
+
+    noteService.getUserNotes()
+
+    $scope.$watch('singleSelect', function () {
+      console.log($scope.singleSelect);
+      if ($scope.singleSelect != "") {
+        $scope.deckNamed = true;
+        $scope.nameTheDeck = false;
+        for (var i = 0; i < $scope.notes.length; i++) {
+          if ($scope.notes[i].postId == $scope.singleSelect) {
+            $scope.titleAndAuthor = $scope.notes[i].deckName + " by " + $scope.notes[i].postedBy;
+            $scope.notesInput = $scope.notes[i].note;
+            var tempArray = [];
+            for (var j = 0; j < $scope.notes[i].keywords.length; j++) {
+              tempArray.push($scope.notes[i].keywords[j].keyword); 
+            }
+             $scope.keywordArray = tempArray;
+            console.log($scope.titleAndAuthor)
+          }
+        }
+      }
+      else {
+        $scope.keywordArray = "";
+        $scope.notesInput = "";
+        $scope.titleAndAuthor = "";
+        $scope.deckNamed = false;
+        $scope.nameTheDeck = true;
+      }
+    })
 
 
     $scope.keyWord = "display: inherit;"
@@ -38,52 +75,52 @@ $scope.test = "test";
     $scope.titleAndAuthor = null;
     var currentID = -1;
 
-    $scope.inputChange = function() {
+    $scope.inputChange = function () {
       var newNotesArray = [];
       var newNotesInput = $scope.notesInput;
       newNotesInput = newNotesInput.split("`");
       for (var i = 0; i < newNotesInput.length; i++) {
         newNotesArray.push(newNotesInput[i]);
-          if ((newNotesArray[i].charAt(newNotesArray[i].length - 1)) == "~") {
-            tempKeyword = newNotesArray[i];
-            tempKeyword = tempKeyword.replace("~", ""); 
-            $scope.keywordArray.push(tempKeyword);
-            newNotesArray.splice(i, 1, tempKeyword);
-            $scope.notesInput = newNotesArray.join("");
-            tempKeyword = [];   
-          }
+        if ((newNotesArray[i].charAt(newNotesArray[i].length - 1)) == "~") {
+          tempKeyword = newNotesArray[i];
+          tempKeyword = tempKeyword.replace("~", "");
+          $scope.keywordArray.push(tempKeyword);
+          newNotesArray.splice(i, 1, tempKeyword);
+          $scope.notesInput = newNotesArray.join("");
+          tempKeyword = [];
         }
-        $scope.newInputArray = newNotesArray;
       }
+      $scope.newInputArray = newNotesArray;
+    }
 
-      $scope.deleteKeyword = function(keyword) {
-        console.log(keyword)
-      }
+    $scope.deleteKeyword = function (keyword) {
+      console.log(keyword)
+    }
 
-      $scope.SubmitNewNote = function() {
-        $http.post("http://localhost:8080/notes/", {firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName, keywords: []})
-        .then(function(response) {
+    $scope.SubmitNewNote = function () {
+      $http.post("http://localhost:8080/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName, keywords: [] })
+        .then(function (response) {
           console.log("These are my new notes!");
           console.log(response)
-          $scope.titleAndAuthor = response.data.note[response.data.note.length-1].deckName + " by " + response.data.note[response.data.note.length-1].postedBy;
-          currentID = response.data.note[response.data.note.length-1].postId;
+          $scope.titleAndAuthor = response.data.note[response.data.note.length - 1].deckName + " by " + response.data.note[response.data.note.length - 1].postedBy;
+          currentID = response.data.note[response.data.note.length - 1].postId;
         })
-        $scope.deckNamed = true;
-        $scope.nameTheDeck = false;
-      }
+      $scope.deckNamed = true;
+      $scope.nameTheDeck = false;
+    }
 
-      $scope.updateNotes = function() {
-        $http.put("http://localhost:8080/notes/" + currentID, {firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray})
-        .then(function(response) {
+    $scope.updateNotes = function () {
+      $http.put("http://localhost:8080/notes/" + currentID, { firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray })
+        .then(function (response) {
           console.log("These are my updated notes!");
           console.log(response)
         })
-      }
+    }
 
-      $scope.updateKeywordDefinition = function() {
-        console.log($scope.keyword)
-      }
-    
+    $scope.updateKeywordDefinition = function () {
+      console.log($scope.keyword)
+    }
+
     //     $animate.on('enter', container,
     //    function callback(element, phase) {
     //      // cool we detected an enter animation within the container
@@ -103,75 +140,5 @@ $scope.test = "test";
     $scope.postId = "";
     $scope.postedBy = "";
     $scope.postedOn = "";
-
-        noteService.getUserNotes()
-            .then(function (response) {
-                $scope.notes = response.data.usersNotes;
-
-            });
-
-    //** Get
-    // $scope.getUserNotes = function () {
-    //   $scope.note = [];
-    //   $http.get('http://localhost:8080/user/notes')
-    //     .then(function (response) {
-    //       for (var i = 0; i < response.data.usersNotes.length; i++) {
-    //         $scope.note.unshift(response.data.usersNotes[i]);
-    //         console.log('This is my index path');
-    //         console.log(response.data);
-    //       }
-    //     })
-    // }
-    // $scope.getUserNotes();
-
-    // $scope.getUsers = function () {
-    //   $scope.note = [];
-    //   $http.get('http://localhost:8080/users')
-    //     .then(function (response) {
-    //       // for (var i = 0; i < response.data.usersNotes.length; i++) {
-    //       $scope.users.push(response.data);
-    //       console.log('This is my index path');
-    //       console.log(response.data);
-    //       // }
-    //     })
-    // }
-    // $scope.getUsers()
-    // ****************************** Button functions ******************************:
-
-    // Submit Button POST
-    // $scope.submitButton = function (notes) {
-    //   console.log("get's here")
-    //   $http.post('http://localhost:8080/user/notes/0', { note: notes })
-    //     .then(function (response) {
-    //       console.log('This is my create path');
-    //       console.log(response.data);
-    //       $scope.getUserNotes();
-    //     })
-    // }
-
-
-    // $scope.editButton = function(user) {
-    //   for (var i = 0; i < $scope.users.length; i++) {
-    //     if(($scope.users[i] ==  user.id) && $scope.notepost == notepost.id)){
-    //       currentUserIndex = i
-
-    //       currentUserId = user.id
-    //       $scope.firstName = user.firstName;
-    //       $scope.lastName = user.lastName;
-    //       $scope.userPost = user.userPost;
-    //     }
-    //   }
-    // }
-
-    // Delete Button
-    // $scope.deleteButton = function (id) {
-    //   $http.delete('http://localhost:8080/user/notes/' + 0 + "/" + id)
-    //     .then(function (response) {
-    //       console.log('This is my destroy path');
-    //       console.log(response.data);
-    //       $scope.getUserNotes();
-    //     })
-    // }
-
 
   });
