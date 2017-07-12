@@ -18,7 +18,10 @@ router.put('/name/:id', sessionController.updateName);
 //PUT DURATION
 router.put('/duration/:id', sessionController.updateDuration); 
 
-//PUT RESULTS
+//PUT RESULTS ANSWER
+router.put('/:id/answer/:id2', sessionController.updateAnswer);
+
+//PUT RESULTS PREPOPULATE
 router.put('/:id', sessionController.update);
 
 //DELETE 

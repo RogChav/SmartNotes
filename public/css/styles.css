@@ -10,23 +10,13 @@
   background: white;
   color: black;
 }
-.imgTest{
-  background-image: url("../images/Menu.png");
-  z-index: 1;
-  /*max-height: 15px;
-  max-width: 20px; */
-  /*width: 120px;
-  height: 120px;*/
-}
 .green{
   background:white;
-  /*background:green;*/
   line-height: 8;
   height:181px;
   text-align: center;
   color: black;
   font-weight: lighter;
-  /*font-style: italic;  */
   font-size: x-large;
   border:none;
   white-space: nowrap;
@@ -35,10 +25,8 @@
   white-space: nowrap;
   line-height: 5;
   background:white;
-  /*background: lightgreen;*/
   text-align: center;
   font-weight: 600;
-  /*font-style: italic;*/
   height: 181px;
   margin: 0px; 
   padding-left: 70px;
@@ -47,12 +35,10 @@
   white-space: nowrap;
   line-height: 8;
   background:white;
-  /*background:yellow;*/
   height:181px;
   text-align: center;
   font-size: x-large;
   font-weight: lighter;
-  /*font-style: italic;  */
   color: black;
 }
 .row{
@@ -68,9 +54,7 @@
   padding: 0 32px 0 31px;
 }
 .naviBar{
-  background:lightgreen;
   height:250px;
-  background:white;
   border-bottom: 1px solid #E5E5E5;
   border-top: 1px solid #E5E5E5;
   min-width: 768px;
@@ -106,7 +90,7 @@
   /*background: whitesmoke;*/
 }
 .active {
-  border-bottom: 2px solid #959595 !important;;
+color:white !important;
 }
 .testBar > li{
   text-decoration: none;
@@ -126,9 +110,10 @@ border-bottom: 8px solid black;
 }
 /*Notes */
 .view{
- height: 1000px;
- background:  #f8f8ff; 
- width:100%;
+  min-height: 1850px;
+  height: 100%;
+  background: #c5c6c4;
+  width: 100%;
 }
 .note-section{
   background: white;
@@ -347,7 +332,9 @@ border-bottom: 8px solid black;
 }
 .deckSelect{
   line-height: 5.3;
-  margin-left: 40px;
+  margin: 0 auto;
+  display: table;
+  padding-left: 20px;
 }
 .deckTimer{
     line-height: 1.6;
@@ -380,6 +367,21 @@ border-bottom: 8px solid black;
 #endSession:hover{
   background: #FFc0c0;
   font-weight: 600;
+}
+.dataCard{
+  background: #262626;
+  min-width: 350px;
+  text-align: left;
+  float: left;
+  min-height: 510px;
+  border-radius: 5px;
+  color: #959593;
+  font-weight: lighter;
+  margin: 18px;
+  padding: 50px;
+  font-size: 18px;
+  border: none;
+  outline: none;
 }
 
 .defInput {

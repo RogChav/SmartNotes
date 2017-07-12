@@ -1,6 +1,6 @@
 angular
     .module('noteApp')
-    .controller('quizController', function ($scope, $timeout, noteService) {
+    .controller('quizController', function ($scope, $timeout, $http, noteService, dataService) {
         // below is the code for my timer
         $scope.counter = 0;
         $scope.onTimeout = function () {
@@ -38,6 +38,8 @@ angular
         $scope.answerWrong = 0;
         // this variable stores card name on the global scope
         $scope.cardName = [];
+        // represents the array of cards that will be tested and are being prepopulated at the start of the test into the backend
+        $scope.prePop = [];
         // this scope will be able to tell if a person got a question wrong
         $scope.notWrong = true;
         // this is where the deck object  is retrieved from the noteService, which get's it from my nodeserver 
@@ -57,6 +59,23 @@ angular
                                 for (var n = 0; n < $scope.notes[i].keywords.length; n++) {
                                     wholeDeckIDs.push($scope.notes[i].keywords[n].id);
                                 }
+                            }
+
+                            function prePopulateResults(arr) {
+                                var tempArr = [];
+                                for (var a = 0; a < arr.length; a++) {
+                                    if (arr[a] == $scope.notes[i].keywords[a].id) {
+                                        tempArr.push({ id: $scope.notes[i].keywords[a].id, keyword: $scope.notes[i].keywords[a].keyword, correct: 0, wrong: 0 })
+                                    }
+                                }
+                                $scope.prePop = tempArr;
+                                console.log(tempArr)
+                            }
+
+                            if ($scope.questionTotal == 0) {
+                                $scope.postSession($scope.notes[i].postId, $scope.notes[i].deckName);
+                                prePopulateResults(wholeDeckIDs);
+                                console.log(wholeDeckIDs)
                             }
                             //sets current notes index to variable accessible to global scope 
                             thisIndex = i;
@@ -80,7 +99,6 @@ angular
                                 }
                             }
                             shuffleArray(wholeDeckIDs);
-                            console.log(wholeDeckIDs);
                             // This represents the id that will be displayed as a question and is referece that that the program could find the complimentary answer and makes sure to display it in the answer selectioins
                             questionID = wholeDeckIDs.splice(0, 1);
                             // console.log("This is the answer and question ID:" + questionID);
@@ -99,7 +117,6 @@ angular
                                     var temp = input.pop();
                                     tempCardCont.push(temp);
                                 }
-                                console.log(questionID);
                                 if ($scope.cardName.length > 1) {
                                     $scope.cardName.shift();
                                 }
@@ -129,6 +146,7 @@ angular
                     // stop timeout timer
                     $scope.stopTimeout();
                     console.log(countFilter($scope.counter));
+                    dataService.updateDuration($scope.tempID, countFilter($scope.counter))
                     // ejects out of the while loop to stop the study session
                     $scope.continueStudy = false;
                     // this displays the select header bar and hides it after a deck is chosen
@@ -166,21 +184,18 @@ angular
                     if (id == questionID) {
                         if ($scope.notWrong == true) {
                             $scope.answerCorrect++;
-                            console.log("Correct!");
+                            dataService.updateAnswer($scope.tempID, id, $scope.notWrong);
                         }
                         else {
                             $scope.answerWrong++;
-                            console.log("Correct, but you got your first attept(s) wrong.");
+                            dataService.updateAnswer($scope.tempID, id, $scope.notWrong);
                         }
                         $scope.questionTotal = $scope.answerCorrect + $scope.answerWrong;
                         resetStudy();
                         $scope.startStudy();
-                        console.log($scope.cardName[0]);
                     }
                     else {
                         $scope.notWrong = false;
-                        $scope.questionTotal = $scope.answerCorrect + $scope.answerWrong;
-                        console.log("Wrong Answer!");
                     }
                 }
                 function resetStudy() {
@@ -199,4 +214,28 @@ angular
                     $scope.notWrong = true;
                 }
             });
+
+        // POST make an instance of a session 
+        $scope.postSession = function (deckId, deckName) {
+            $http.post("/session", { deckId: deckId, deckName: deckName })
+                .then(function (response) {
+                    $scope.tempID = response.data.sessionID.id;
+                    console.log('This is my new instance of session and its id');
+                    console.log(response.data.sessionID.id);
+                })
+        }
+        $scope.updateResults = function (arr) {
+            for (var i = 0; i < arr.length; i++) {
+                dataService.updateResults($scope.tempID, arr[i].id, arr[i].keyword, arr[i].correct, arr[i].wrong);
+            }
+        }
+        $scope.$watch('tempID', function () {
+            console.log("This is the id.")
+            console.log($scope.tempID)
+            if ($scope.tempID > 0) {
+                $scope.updateResults($scope.prePop);
+                console.log($scope.prePop)
+            }
+        });
+
     })

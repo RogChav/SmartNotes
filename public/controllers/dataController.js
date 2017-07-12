@@ -1,6 +1,7 @@
 angular
     .module('noteApp')
     .controller('dataController', function ($scope, dataService) {
+        $scope.displayOnGraph = "";
         // POST scopes
         $scope.deckId = "";
         $scope.deckName = "";
@@ -9,14 +10,54 @@ angular
         // PUT scopes
         $scope.thisDeckId = null;
         $scope.id = null;
-        $scope.duration =  dataService.postID();;
+        $scope.duration = dataService.postID();
         $scope.correct = 0
         $scope.wrong = 0;
 
         dataService.getSessionData()
             .then(function (response) {
-                $scope.sessions = response.data;
+                $scope.sessions = response.data.sessions;
                 console.log($scope.sessions)
+
+                function grabPropertyPerc(arr, prop, newloc) {
+                    var tempArr = [];
+                    for (var i = 0; i < arr.length; i++) {
+                        tempArr.push(arr[i][prop])
+                    }
+                    $scope[newloc].push(tempArr);
+                }
+                function grabPropertyData(id, arr, prop, newloc) {
+                    for (var i = 0; i < arr.length; i++) {
+                        if (arr.id == id) {
+                            $scope[newloc].push(arr[i][prop]);
+                        }
+                    }
+                }
+                $scope.currentDeck = null;
+                $scope.showThis = function (id) {
+                    // if ($scope.currentSession == null) {
+                    $scope.currentSession = id;
+                }
+                $scope.$watch('currentSession', function () {
+                    grabPropertyData($scope.currentSession, $scope.sessions, "name", "series");
+
+                    grabPropertyData($scope.currentSession, $scope.sessions[0].results, "keyword", "labels");
+
+                    for (var i = 0; i < $scope.sessions.length; i++) {
+                        if ($scope.sessions[i].id == $scope.currentSession) {
+                            $scope.currentDeck = $scope.sessions[i].deckIDTested;
+                            grabPropertyPerc($scope.sessions[i].results, "percentage", "data");
+                        }
+                    }
+                })
+                // grabPropertyData($scope.currentSession, $scope.sessions, "name", "series");
+                // grabPropertyData($scope.sessions[0].results, "keyword", "labels");
+                // for (var i = 0; i < $scope.sessions.length; i++) {
+                //     grabPropertyPerc($scope.sessions[i].results, "percentage", "data");
+                // }
+                $scope.$watch('displayOnGraph', function () {
+                    console.log($scope.displayOnGraph);
+                })
             });
         $scope.postSession = function () {
             dataService.postSession($scope.deckId, $scope.deckName, $scope.name);
@@ -31,12 +72,19 @@ angular
             console.log("inside my delete function")
             dataService.deleteSession($scope.id);
         }
-      
-        $scope.labels = ['Keyword', 'keyword2', 'keyword3', 'keyword4', 'keyword5', 'keyword6', 'keyword7'];
-        $scope.series = ['Session1', 'Session 2', 'session 3'];
-        $scope.data = [
-            [65, 59, 0, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90],
-            [28, 48, 40, 19, 1, 1, 1]
-        ];
+
+        $scope.clearGraph = function () {
+            $scope.currentSession = null;
+            $scope.labels = [];
+            $scope.series = [];
+            $scope.data = [];
+        }
+
+        $scope.currentSession = null;
+        $scope.labels = [];
+        $scope.series = [];
+        $scope.data = [];
+        console.log($scope.labels)
+        console.log($scope.series)
+        console.log($scope.data)
     })

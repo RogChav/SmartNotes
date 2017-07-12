@@ -2,7 +2,49 @@ angular
   .module("noteApp")
   .controller("noteController", function ($scope, noteService, $http) {
 
-$scope.test = "test"; 
+    $scope.notes = "";
+    $scope.definition = "";
+    // This is the value of my select select element, it will change to whichever option I choose
+    $scope.singleSelect = "";
+
+    noteService.getUserNotes()
+      .then(function (response) {
+        $scope.notes = response.data.usersNotes;
+        console.log($scope.notes)
+      });
+
+    noteService.getUserNotes()
+
+    $scope.$watch('singleSelect', function () {
+      $scope.currentID = $scope.singleSelect;
+    })
+
+    $scope.$watch('currentID', function () {
+      console.log("this is running")
+      console.log($scope.currentID);
+      if ($scope.singleSelect != "") {
+        $scope.deckNamed = true;
+        $scope.nameTheDeck = false;
+        for (var i = 0; i < $scope.notes.length; i++) {
+          if ($scope.notes[i].postId == $scope.currentID) {
+            $scope.titleAndAuthor = $scope.notes[i].deckName + " by " + $scope.notes[i].postedBy;
+            $scope.notesInput = $scope.notes[i].note;
+            $scope.theseNotes = $scope.notes[i];
+            $scope.currentID = $scope.notes[i].postId
+            console.log($scope.theseNotes);
+          }
+        }
+      }
+      else {
+        $scope.currentID = "";
+        $scope.theseNotes = "";
+        $scope.keywordArray = [];
+        $scope.notesInput = "";
+        $scope.titleAndAuthor = "";
+        $scope.deckNamed = false;
+        $scope.nameTheDeck = true;
+      }
+    })
 
 
     $scope.keyWord = "display: inherit;"
@@ -36,55 +78,75 @@ $scope.test = "test";
     $scope.deckNamed = false;
     $scope.nameTheDeck = true;
     $scope.titleAndAuthor = null;
-    var currentID = -1;
 
-    $scope.inputChange = function() {
+
+    $scope.inputChange = function () {
       var newNotesArray = [];
       var newNotesInput = $scope.notesInput;
       newNotesInput = newNotesInput.split("`");
       for (var i = 0; i < newNotesInput.length; i++) {
         newNotesArray.push(newNotesInput[i]);
-          if ((newNotesArray[i].charAt(newNotesArray[i].length - 1)) == "~") {
-            tempKeyword = newNotesArray[i];
-            tempKeyword = tempKeyword.replace("~", ""); 
-            $scope.keywordArray.push(tempKeyword);
-            newNotesArray.splice(i, 1, tempKeyword);
-            $scope.notesInput = newNotesArray.join("");
-            tempKeyword = [];   
-          }
+        if ((newNotesArray[i].charAt(newNotesArray[i].length - 1)) == "~") {
+          tempKeyword = newNotesArray[i];
+          tempKeyword = tempKeyword.replace("~", "");
+          $scope.updateKeyword(tempKeyword);
+          newNotesArray.splice(i, 1, tempKeyword);
+          $scope.notesInput = newNotesArray.join("");
+          tempKeyword = [];
         }
-        $scope.newInputArray = newNotesArray;
       }
+      $scope.newInputArray = newNotesArray;
+    }
 
-      $scope.deleteKeyword = function(keyword) {
-        console.log(keyword)
-      }
+    $scope.deleteKeyword = function (id) {
+      $http.delete("/notes/" + $scope.currentID + "/keyword/" + id)
+        .then(function (response) {
+          console.log('This is my destroy path');
+          console.log(response.data);
+          $scope.theseNotes = response.data;
+        })
+    }
 
-      $scope.SubmitNewNote = function() {
-        $http.post("http://localhost:8080/notes/", {firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName, keywords: []})
-        .then(function(response) {
+    $scope.SubmitNewNote = function () {
+      $http.post("http://localhost:8080/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName })
+        .then(function (response) {
           console.log("These are my new notes!");
           console.log(response)
-          $scope.titleAndAuthor = response.data.note[response.data.note.length-1].deckName + " by " + response.data.note[response.data.note.length-1].postedBy;
-          currentID = response.data.note[response.data.note.length-1].postId;
+          $scope.titleAndAuthor = response.data.note[response.data.note.length - 1].deckName + " by " + response.data.note[response.data.note.length - 1].postedBy;
+          $scope.currentID = response.data.note[response.data.note.length - 1].postId;
+          $scope.singleSelect = $scope.currentID;
         })
-        $scope.deckNamed = true;
-        $scope.nameTheDeck = false;
-      }
+      $scope.deckNamed = true;
+      $scope.nameTheDeck = false;
+    }
 
-      $scope.updateNotes = function() {
-        $http.put("http://localhost:8080/notes/" + currentID, {firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray})
-        .then(function(response) {
+    $scope.updateNotes = function () {
+      console.log($scope.currentID)
+      $http.put("http://localhost:8080/notes/" + $scope.currentID, { firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray })
+        .then(function (response) {
           console.log("These are my updated notes!");
-          console.log(response)
+          console.log(response.data)
         })
-      }
+    }
 
-      $scope.updateKeywordDefinition = function() {
-         $http.put("http://localhost:8080/notes/" + currentID,
-        console.log($scope.keyword)
-      }
-    
+    $scope.updateKeyword = function (keyword, definition) {
+      $http.put("notes/" + $scope.currentID + "/keyword", { keyword: keyword, definition: definition })
+        .then(function (response) {
+          console.log("These are my updated keywords!");
+          console.log(response.data)
+          $scope.theseNotes = response.data;
+        })
+    }
+    $scope.updateKeywordDefinition = function (cardID, definition) {
+      console.log($scope.currentID);
+      $http.put("/notes/" + $scope.currentID + "/definition/" + cardID, { definition: definition })
+        .then(function (response) {
+          console.log("These are my notes with my updated definition!");
+          console.log(response.data)
+          $scope.theseNotes = response.data;
+        })
+    }
+
 
     // users
     $scope.id = "";
@@ -99,10 +161,6 @@ $scope.test = "test";
     $scope.postId = "";
     $scope.postedBy = "";
     $scope.postedOn = "";
-
-        noteService.getUserNotes()
-            .then(function (response) {
-                $scope.notes = response.data.usersNotes;
 
   });
 });

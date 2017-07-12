@@ -12,6 +12,13 @@ router.post('/', notesController.create);
 //GET
 router.get('/:id', notesController.show);
 
+
+//PUT 
+router.put('/:id/keyword', notesController.updateKeywords);
+
+//PUT 
+router.put('/:id/definition/:id2', notesController.updateKeywordDefinition);
+
 //PUT 
 router.put('/:id', notesController.update);
 

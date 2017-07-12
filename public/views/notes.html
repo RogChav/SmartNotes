@@ -4,8 +4,14 @@
       <div class="note-section text-center" ng-class="{'col-xs-6': showCol}" style="{{noteCol}}">
         <div class="text-center noteHeader">
           <h1>Notes:</h1>
+          <div class="deckSelect">
+            <select name="repeatSelect" id="repeatSelect" ng-model="singleSelect">
+              <option value="">--Please Select Your Notes--</option> <!-- not selected /  -->
+              <option ng-repeat="option in notes" value="{{option.postId}}">{{option.deckName}}</option>
+          </select>
+          </div>
           <div ng-show="nameTheDeck">
-            <input type="text" placeholder="Deck Name" class="deckNameInput" ng-model="deckName"/>
+            <input type="text" placeholder="Deck Name" class="deckNameInput" ng-model="deckName" />
             <input type="text" placeholder="First Name" class="deckNameInput" ng-model="firstName" />
             <input type="text" placeholder="Last Name" class="deckNameInput" ng-model="lastName" />
             <button ng-click="SubmitNewNote()">Submit</button>
@@ -21,28 +27,28 @@
           </div>
         </div>
 
-      </div> <!-- End of note-section div (line 4  -->
+      </div>
+      <!-- End of note-section div (line 4  -->
       <div class="keyWord animated fadeIn" style="{{keyWord}} {{keyWordCol}}">
         <div class="text-center noteHeader">
           <h1>Keywords:</h1>
-            <button ng-click="minimize()" class="btn btn-success hideOrShow">Hide</button>
+          <button ng-click="minimize()" class="btn btn-success hideOrShow">Hide</button>
         </div>
         <div class="row format">
-          <div class="well keywordWell" ng-repeat="keyword in keywordArray track by $index">
+          <div class="well keywordWell" ng-repeat="keyword in theseNotes.keywords">
             <div>
               <div class="keywordListDef">
-                <h2>{{keyword}} = </h2>
-                <input class="defInput" type="text" />
-              </div>
-              <div>
-                <button class="btn defButton" ng-click="updateKeywordDefinition()">Defined</button>
-                <button class="btn btn-danger defButton" ng-click="deleteKeyword(keyword.Index)">Deleted</button>
+                <h2>{{keyword.keyword}} = </h2>
+                <input ng-model = "definition" placeholder="{{keyword.definition}}" class="defInput" type="text" />
               </div>
             </div>
+
+            <button class="btn defButton" ng-click="updateKeywordDefinition(keyword.id, definition)">Defined</button>
+            <button class="btn btn-danger defButton" ng-click="deleteKeyword(keyword.id)">Deleted</button>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
