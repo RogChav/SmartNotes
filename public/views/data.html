@@ -49,15 +49,19 @@
         <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
         </canvas>
     </div>
-    <div ng-repeat="session in sessions">
-        <div class="dataCard">
-            <h4>Session name: {{ session.name }}</h4>
-            <h4>Deck Studied: {{ session.deckName}}</h4>
-            <h4>Time studied: {{ session.localTime}}</h4>
-            <h4>Date studied: {{ session.postDate}}</h4>
+    <div>
+        <button ng-click = "clearGraph()"class="btn">Clear</button>
+    </div>
+    <div ng-model = "displayInGraph" ng-repeat="session in sessions">
+        <button  ng-click="showThis(session.id)"class="dataCard">
+            <p>Session name: {{ session.name }}</p>
+            <p>Deck Studied: {{ session.deckName}}</p>
+            <p>Time spend Studying: {{ session.duration}}</p>
+            <p>Start Time: {{ session.localTime}}</p>
+            <p>Date studied: {{ session.postDate}}</p>
             <div ng-repeat=" result in session.results">
-                <div>{{ result.keyword }}</div>
-            </div>
+                <div class ="cardDisp"><strong>{{ result.keyword }}</strong> {{ result.percentage}}%</div>
+            </button>
         </div>
 
     </div>

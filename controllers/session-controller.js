@@ -45,14 +45,16 @@ Session.prototype.localTime = function () {
     return z(hour) + ":" + z(minutes);
 }
 Result.prototype.updateAnswer = function (input) {
-    if (input == "true") {
+    if (input == true) {
         this.correct++
+        this.total = this.correct + this.wrong;
+        this.percentage = this.getPercentage();
     }
     else {
         this.wrong++
+        this.total = this.correct + this.wrong;
+        this.percentage = this.getPercentage();
     }
-    this.total = this.correct + this.wrong;
-    this.percentage = this.getPercentage();
 }
 
 Session.prototype.postDate = function () {
@@ -79,7 +81,7 @@ sessions[0].newResult(5, "keyword 5", 6, 5);
 sessions[0].newResult(6, "keyword 6", 11, 0);
 sessions[0].newResult(7, "keyword 7", 5, 6);
 sessions[0].newResult(8, "keyword 8", 4, 7);
-
+sessions[0].setDuration("867:53:09");
 
 sessions[1].newResult(0, "keyword", 6, 6);
 sessions[1].newResult(1, "keyword 1", 5, 7);
@@ -90,6 +92,7 @@ sessions[1].newResult(5, "keyword 5", 7, 5);
 sessions[1].newResult(6, "keyword 6", 12, 0);
 sessions[1].newResult(7, "keyword 7", 6, 6);
 sessions[1].newResult(8, "keyword 8", 5, 7);
+sessions[1].setDuration("00:19:84");
 
 sessions[2].newResult(0, "keyword", 8, 4);
 sessions[2].newResult(1, "keyword 1", 7, 5);
@@ -100,6 +103,8 @@ sessions[2].newResult(5, "keyword 5", 9, 3);
 sessions[2].newResult(6, "keyword 6", 14, 0);
 sessions[2].newResult(7, "keyword 7", 8, 4);
 sessions[2].newResult(8, "keyword 8", 7, 5);
+sessions[2].setDuration("00:17:38");
+
 //GET
 function index(req, res, next) {
     res.json({ sessions: sessions });
@@ -143,11 +148,11 @@ function update(req, res, next) {
 function updateAnswer(req, res, next) {
     for (var i = 0; i < sessions.length; i++) {
         if (sessions[i].id == req.params.id) {
-            console.log(sessions[i].id)
             for (var j = 0; j < sessions[i].results.length; j++) {
                 if (sessions[i].results[j].cardID == req.params.id2) {
+                                console.log(req.body.rightOrWrong)
                     sessions[i].results[j].updateAnswer(req.body.rightOrWrong);
-                    res.json({ SessionAnswer: sessions[i].results[j] });
+                    res.json({ SessionAnswer: sessions[i] });
                 }
             }
         }
@@ -159,7 +164,7 @@ function updateDuration(req, res, next) {
     for (var i = 0; i < sessions.length; i++) {
         if (sessions[i].id == req.params.id) {
             sessions[i].setDuration(req.body.duration);
-            res.json({ Session: sessions });
+            res.json({ Session: sessions[i] });
         }
     }
     res.json({ error: "error, please double check your input." });

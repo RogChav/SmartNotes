@@ -65,7 +65,7 @@ angular
                                 var tempArr = [];
                                 for (var a = 0; a < arr.length; a++) {
                                     if (arr[a] == $scope.notes[i].keywords[a].id) {
-                                        tempArr.push({ id: a, keyword: $scope.notes[i].keywords[a].keyword, correct: 0, wrong: 0 })
+                                        tempArr.push({ id: $scope.notes[i].keywords[a].id, keyword: $scope.notes[i].keywords[a].keyword, correct: 0, wrong: 0 })
                                     }
                                 }
                                 $scope.prePop = tempArr;
@@ -146,6 +146,7 @@ angular
                     // stop timeout timer
                     $scope.stopTimeout();
                     console.log(countFilter($scope.counter));
+                    dataService.updateDuration($scope.tempID, countFilter($scope.counter))
                     // ejects out of the while loop to stop the study session
                     $scope.continueStudy = false;
                     // this displays the select header bar and hides it after a deck is chosen

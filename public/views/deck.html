@@ -1,20 +1,19 @@
 <!--Can make filter asking how many cards the user would like to see at a time-->
 <div class="view">
+
     <div class=" flipper deckCont">
-        <div class="front row">
+          <div class="deckSelect">
+            <select name="repeatSelect" id="repeatSelect" ng-model="singleSelect">
+              <option value="">--Please Select A Deck to Review--</option> <!-- not selected /  -->
+              <option ng-repeat="option in notes" value="{{option.postId}}">{{option.deckName}}</option>
+          </select>
+          </div>
+        <div class="row" ng-repeat="option in theseNotes.keywords">
             <div class="col-xs-6">
-                <div class="indexCard"><span>word</span></div>
+                <div class="indexCard"><span>{{option.keyword}}</span></div>
             </div>
             <div class="col-xs-6">
-                <div class="indexCard"><span>wordy mc word word</span></div>
-            </div>
-        </div>
-        <div class="back row">
-            <div class="col-xs-6">
-                <div class="indexCard"><span>word</span></div>
-            </div>
-            <div class="col-xs-6">
-                <div class="indexCard"><span>wordy mc word word</span></div>
+                <div class="indexCard"><span>{{option.definition}}</span></div>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 angular
     .module("noteApp")
     .service("dataService", function ($http) {
-
+        // stores id of current session so that I can update name of session and update test results in realtime
         var postID = "";
         //Get
         this.getSessionData = function () {
