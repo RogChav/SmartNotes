@@ -6,7 +6,7 @@
           <h1>Notes:</h1>
           <div class="deckSelect">
             <select name="repeatSelect" id="repeatSelect" ng-model="singleSelect">
-              <option value="">--Please Select Your Notes--</option> <!-- not selected /  -->
+              <option value="">--Create New--</option> <!-- not selected /  -->
               <option ng-repeat="option in notes" value="{{option.postId}}">{{option.deckName}}</option>
           </select>
           </div>
@@ -23,7 +23,6 @@
             <button ng-click="maximize()" class="btn btn-info hideOrShow" ng-show="hidden">Show</button>
             <textarea class="text-left" rows="15" cols={{notesCols}} ng-model="notesInput" ng-change="inputChange()"> 
             </textarea>
-            <button class="inputButton" ng-click="updateNotes()">Submit</button>
           </div>
         </div>
 

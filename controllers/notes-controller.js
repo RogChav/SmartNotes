@@ -82,7 +82,6 @@ function index(req, res, next) {
 //POST
 function create(req, res, next) {
     var tempUserNote = req.body.note;
-    // notes.push(tempUserNote);
     notes.push(new Note(noteID++, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName));
     res.json({ note: notes });
 }
@@ -129,7 +128,6 @@ function updateKeywordDefinition(req, res, next) {
     }
         res.json({ error: "Sorry those notes do not exist." });
     }
-
 
     //DELETE NOTES
     function destroy(req, res, next) {
