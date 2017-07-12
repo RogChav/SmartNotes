@@ -2,14 +2,14 @@ var notes = [];
 var noteID = null;
 var keywordID = null;
 
-function Note(id, firstName, lastName, note, deckName) {
+function Note(id, firstName, lastName, note, deckName, kw) {
     this.postId = id;
     this.postedBy = firstName + " " + lastName;
     this.postedDate = this.postDate();
     this.postedTime = this.postTime();
     this.note = note;
     this.deckName = deckName || "Deck " + "#" + (this.postId + 1);
-    this.keywords = [];
+    this.keywords = kw ? kw : [];
 }
 
 // function Note(id, firstName, lastName, note, deckName, kw) {

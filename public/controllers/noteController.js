@@ -89,7 +89,7 @@ angular
         if ((newNotesArray[i].charAt(newNotesArray[i].length - 1)) == "~") {
           tempKeyword = newNotesArray[i];
           tempKeyword = tempKeyword.replace("~", "");
-          $scope.updateKeyword(tempKeyword);
+          $scope.updateKeyword(tempKeyword, "");
           newNotesArray.splice(i, 1, tempKeyword);
           $scope.notesInput = newNotesArray.join("");
           tempKeyword = [];
@@ -122,7 +122,7 @@ angular
 
     $scope.updateNotes = function () {
       console.log($scope.currentID)
-      $http.put("http://localhost:8080/notes/" + $scope.currentID, { firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray })
+      $http.put("http://localhost:8080/notes/" + $scope.currentID, { firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywords })
         .then(function (response) {
           console.log("These are my updated notes!");
           console.log(response.data)
@@ -162,5 +162,5 @@ angular
     $scope.postedBy = "";
     $scope.postedOn = "";
 
-  });
 });
+
