@@ -54,12 +54,12 @@
     </div>
     <div ng-model = "displayInGraph" ng-repeat="session in sessions">
         <button  ng-click="showThis(session.id)"class="dataCard">
-            <p>Session name: {{ session.name }}</p>
-            <p>Deck Studied: {{ session.deckName}}</p>
-            <p>Time spend Studying: {{ session.duration}}</p>
-            <p>Start Time: {{ session.localTime}}</p>
-            <p>Date studied: {{ session.postDate}}</p>
-            <div ng-repeat=" result in session.results">
+            <p><strong>Session name: </strong> {{ session.name }}</p>
+            <p><strong>Deck Studied: </strong> {{ session.deckName}}</p>
+            <p><strong>Time spend Studying: </strong> {{ session.duration}}</p>
+            <p><strong>Start Time: </strong> {{ session.localTime}}</p>
+            <p><strong>Date studied: </strong> {{ session.postDate}}</p>
+            <div class = "cardStat" ng-repeat=" result in session.results">
                 <div class ="cardDisp"><strong>{{ result.keyword }}</strong> {{ result.percentage}}%</div>
             </button>
         </div>

@@ -45,7 +45,9 @@ Note.prototype.postDate = function () {
     var concat = day + month + year;
     return concat
 }
-
+Note.prototype.updateNote = function(note){
+    this.note = note;
+}
 Note.prototype.addKeyword = function (id, keyword, definition) {
     this.keywords.push(new Keyword(id, keyword, definition));
 }
@@ -81,14 +83,14 @@ function index(req, res, next) {
 function create(req, res, next) {
     var tempUserNote = req.body.note;
     // notes.push(tempUserNote);
-    notes.push(new Note(noteID++, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName, req.body.keywords));
+    notes.push(new Note(noteID++, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName));
     res.json({ note: notes });
 }
 
 function update(req, res, next) {
     for (var i = 0; i < notes.length; i++) {
         if (notes[i].postId == req.params.id) {
-            notes.splice(i, 1, new Note(req.params.id, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName, req.body.keywords));
+            notes[i].updateNote(req.body.note);
             res.json({ note: notes });
         }
     }

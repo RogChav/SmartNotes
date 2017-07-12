@@ -121,8 +121,7 @@ angular
     }
 
     $scope.updateNotes = function () {
-      console.log($scope.currentID)
-      $http.put("http://localhost:8080/notes/" + $scope.currentID, { firstName: $scope.firstName, lastName: $scope.lastName, note: $scope.notesInput, deckName: $scope.deckName, keywords: $scope.keywordArray })
+      $http.put("http://localhost:8080/notes/" + $scope.currentID, {note: $scope.notesInput})
         .then(function (response) {
           console.log("These are my updated notes!");
           console.log(response.data)

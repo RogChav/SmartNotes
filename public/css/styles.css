@@ -84,10 +84,19 @@
   background:#323232;
   outline: none;
 }
+.listItem > a > button{
+  color: #959595;
+  height: 100%;
+  border: none;
+  width: 100%;
+  background:#323232;
+  outline: none;
+}
 .listItem:hover > button{
   color:black;
-  /*border-bottom: 3px solid black;*/
-  /*background: whitesmoke;*/
+}
+.listItem:hover > a > button{
+  color:black;
 }
 .active {
 color:white !important;
@@ -368,6 +377,7 @@ border-bottom: 8px solid black;
   background: #FFc0c0;
   font-weight: 600;
 }
+/*Data page CSS*/
 .dataCard{
   background: #262626;
   min-width: 350px;
@@ -383,7 +393,14 @@ border-bottom: 8px solid black;
   border: none;
   outline: none;
 }
-
+.cardStat{
+  border-radius: 5px;
+  color: #090808;
+  background: #7F7F7F;
+  padding-left: 24px;
+  width: 180px;
+  margin-left: 15px;
+}
 .defInput {
   float: right;
   height: 50px;
