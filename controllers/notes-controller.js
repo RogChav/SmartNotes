@@ -2,14 +2,14 @@ var notes = [];
 var noteID = null;
 var keywordID = null;
 
-function Note(id, firstName, lastName, note, deckName, kw) {
+function Note(id, firstName, lastName, note, deckName) {
     this.postId = id;
     this.postedBy = firstName + " " + lastName;
     this.postedDate = this.postDate();
     this.postedTime = this.postTime();
     this.note = note;
     this.deckName = deckName || "Deck " + "#" + (this.postId + 1);
-    this.keywords = kw ? kw : [];
+    this.keywords = [];
 }
 
 // function Note(id, firstName, lastName, note, deckName, kw) {
@@ -82,7 +82,6 @@ function index(req, res, next) {
 //POST
 function create(req, res, next) {
     var tempUserNote = req.body.note;
-    // notes.push(tempUserNote);
     notes.push(new Note(noteID++, req.body.firstName, req.body.lastName, req.body.note, req.body.deckName));
     res.json({ note: notes });
 }
@@ -129,7 +128,6 @@ function updateKeywordDefinition(req, res, next) {
     }
         res.json({ error: "Sorry those notes do not exist." });
     }
-
 
     //DELETE NOTES
     function destroy(req, res, next) {
