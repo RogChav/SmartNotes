@@ -1,3 +1,61 @@
-<div ng-bind-html="test"></div>
-<h1>{{testing}}</h1>
-<input type="text" ng-model = "testing"/>
+<div class="homePage">
+    <section class="row playerMargin">
+        <div class="col-container">
+            <div class="userTextBox">
+                <div class="usersTitle">
+                    <h1 class="textMargin">{{ bannerHeader }}</h1>
+                    <h2 class="textMargin userText">{{ bannerMessage }}</h2>
+                </div>
+            </div>
+            <div class="userForm">
+                <div class="form-card">
+                    <p class="userBanner">Start A New Account</p>
+                    <form>
+                        <fieldset class="formHeight">
+                            <div class="marginForm row col-container">
+                                <div class="col-xs-6">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" placeholder="First Name" ng-model="user.firstName" />
+                                    <div ng-if="pleaseEnter">Please enter your firstName</div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Last Name" ng-model="user.lastName" />
+                                    <div ng-if="pleaseEnter2">Please enter your lastName</div>
+                                </div>
+                            </div>
+                            <div class="marginForm row col-container">
+                                <div class="col-xs-6">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" placeholder="Email" ng-model="user.email">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Date of birth</label>
+                                    <input type="Date" class="form-control" ng-model="user.dob ">
+                                </div>
+                            </div>
+                            <div class=" marginForm row col-container">
+                                <div class="col-xs-6">
+                                    <label>Age</label>
+                                    <input type="text" class="form-control" placeholder="Age" ng-model="user.age">
+                                </div>
+                                <div class="col-xs-6">
+                                    <label>Gender</label>
+                                    <input type="text" class="form-control" placeholder="Gender" ng-model="user.gender ">
+                                </div>
+
+                            </div>
+                            <div class=" marginForm row col-container">
+                                <div class="centerForm">
+                                    <button name="button " type="submit " class="userbtn btn btn-primary ">
+                                  <span>Sign Up Free</span>
+                             </button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

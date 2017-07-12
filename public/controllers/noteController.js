@@ -111,7 +111,7 @@ angular
       $http.post("http://localhost:8080/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName })
         .then(function (response) {
           console.log("These are my new notes!");
-          console.log(response)
+          console.log(response.data)
           $scope.titleAndAuthor = response.data.note[response.data.note.length - 1].deckName + " by " + response.data.note[response.data.note.length - 1].postedBy;
           $scope.currentID = response.data.note[response.data.note.length - 1].postId;
           $scope.singleSelect = $scope.currentID;

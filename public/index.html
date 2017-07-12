@@ -39,16 +39,18 @@
 <body ng-cloak>
 
   <div class="row topbar">
-    <div class="green col-xs-2">
-      <a class="green" ui-sref="home"><span >Home</span></a>
+    <div class="green col-xs-3">
+      <a class="green" ui-sref="home">
+        <p> SmartNotes</p>
+      </a>
     </div>
-    <div class="lightgreen col-xs-7">
+    <div class="lightgreen col-xs-6">
       <h1 class="lightgreen"><span>Note And Study</span></h1>
     </div>
     <div class="yellow col-xs-3">
-      <a class="yellow" ui-sref="newUser"><span>Sign In / Register</span></a>
+      <a class="yellow" ui-sref="home"><span>Sign In / Register</span></a>
     </div>
-    </div>
+  </div>
   </div>
   <div class="row naviBar">
     <ul>
@@ -57,10 +59,11 @@
       <li class="listItem col-xs-2 "><button ui-sref-active="active" ui-sref="deck"><span>Study Deck</span></button></li>
       <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="quiz"><span>Quiz</span></button></li>
       <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="data"><span>Your Data</span></button></li>
-      <li class="listItem col-xs-2"><a href="https://connect.secure.wellsfargo.com/auth/logout?st=1499841396&SAMLart=AAQCQOoEQCR14WDgSxaU4QNGCHpGcoS1YGaHvVMVwgQdMwp9Jw%2FfZ7P%2BbHA%3D"><button ><span>Logout</span></button></a></li>
+      <li class="listItem col-xs-2"><button  ui-sref="home"><span>Logout</span></button></li>
     </ul>
   </div>
-<!--
+  <!--https://connect.secure.wellsfargo.com/auth/logout?st=1499841396&SAMLart=AAQCQOoEQCR14WDgSxaU4QNGCHpGcoS1YGaHvVMVwgQdMwp9Jw%2FfZ7P%2BbHA%3D-->
+  <!--
   <div class="test row">
     <div class="col-xs-2"></div>
     <div class="col-xs-2"></div>
@@ -79,11 +82,22 @@
 
   <!--features > Smart notes- take notes and we'll help you segregate keypoint and vocabulary as you go you can review and quiz on the note cards whenever you'd like and you're learning progress is tracked so that you can optimize your study time and learn more efficiently. -->
   <div ui-view></div>
-
+  <footer>
+    <div class="row naviBar">
+      <ul>
+        <li class="listItem col-xs-2"><button><span>FAQ</span></button></li>
+        <li class="listItem col-xs-2"><button><span>Careers</span></button></li>
+        <li class="listItem col-xs-2"><button><span>SiteMap</span></button></li>
+        <li class="listItem col-xs-2"><button>Private Policy</button></li>
+        <li class="listItem col-xs-2"><button><span>Terms of Use</span></button></li>
+        <li class="listItem col-xs-2 "><button><span>Legal</span></button></li>
+      </ul>
+    </div>
+  </footer>
   <!-- Module -->
   <script type="text/javascript" src="./app.js"></script>
   <!-- Filters -->
-   <script type="text/javascript" src="./filters/timerFilter.js"></script>
+  <script type="text/javascript" src="./filters/timerFilter.js"></script>
   <!--Services -->
   <script type="text/javascript" src="./services/noteService.js"></script>
   <script type="text/javascript" src="./services/dataService.js"></script>

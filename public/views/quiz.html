@@ -1,4 +1,4 @@
-<div class="view">
+<div>
     <div class="quizCont">
         <div class="quizHeader">
             <div style="{{display}}" class="quizCenter">
@@ -19,7 +19,7 @@
             <div style="{{studyOn}}" class="quizCenter">
                 <ul>
                     <li>
-                        <h2>Studing:</h2>
+                        <h2>Studying:</h2>
                     </li>
                     <li>
                         <div class="deckSelect">
@@ -39,7 +39,7 @@
                 </ul>
             </div>
         </div>
-        <div class="quizScreen">
+        <div class="quizScreen" ng-class="{'animated jello': wrong}">
             <p>{{definition}}</p>
         </div>
         <div class="testScore">
@@ -52,7 +52,7 @@
         </div>
         <div class="choiceBar">
             <ul>
-                <li ng-repeat="option in keyWords" class="choiceItem"><button id="choice{{option.id}}" ng-click="checkAnswer(option.id)" ;>{{option.keyword}}</button></li>
+                <li ng-repeat="option in keyWords" class="choiceItem"><button id="choice{{option.id}}" ng-click="checkAnswer(option.id)">{{option.keyword}}</button></li>
             </ul>
 
         </div>

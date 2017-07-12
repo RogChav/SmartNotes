@@ -42,6 +42,8 @@ angular
         $scope.prePop = [];
         // this scope will be able to tell if a person got a question wrong
         $scope.notWrong = true;
+        // These variables will trigger animation when set to true
+        $scope.wrong = false;
         // this is where the deck object  is retrieved from the noteService, which get's it from my nodeserver 
         noteService.getUserNotes()
             .then(function (response) {
@@ -193,9 +195,11 @@ angular
                         $scope.questionTotal = $scope.answerCorrect + $scope.answerWrong;
                         resetStudy();
                         $scope.startStudy();
+                        $scope.wrong = false;
                     }
                     else {
                         $scope.notWrong = false;
+                        $scope.wrong = true;
                     }
                 }
                 function resetStudy() {
@@ -212,6 +216,7 @@ angular
                     // reset temp index
                     thisIndex = null;
                     $scope.notWrong = true;
+                    $scope.wrong = false;
                 }
             });
 

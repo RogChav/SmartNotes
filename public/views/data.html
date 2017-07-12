@@ -1,59 +1,15 @@
 <div class="view">
-    <!--<div class="row">
-        <div class="col-xs-6">
-            <labels>Deck ID</labels>
-            <input ng-model="thisDeckId" placeholder="ThisDeckId" type="number" />
-        </div>
-        <div class="col-xs-6">
-            <labels>ID</labels>            
-            <input ng-model="id" placeholder="id" type="number" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-3">
-            <labels>Duration</labels>            
-            <input ng-model="duration" placeholder="Duration" type="text" />
-        </div>
-         <div class="col-xs-3">
-            <labels>correct</labels>            
-            <input ng-model="correct" placeholder="correct" type="number" />
-        </div>
-          <div class="col-xs-3">
-            <labels>wrong</labels>            
-            <input ng-model="wrong" placeholder="wrong" type="number" />
-        </div>
-        <div class="col-xs-3">
-            <button class="btn btn-danger" ng-click="updateDuration()">updateDuration</button>
-        </div>
-    </div>
-      <div class="row">
-        <div class="col-xs-6">
-            <labels>Deck ID</labels>
-            <input ng-model="deckId" placeholder="DeckId" type="text" />
-        </div>
-        <div class="col-xs-6">
-            <labels>Deck Name</labels>            
-            <input ng-model="deckName" placeholder="DeckName" type="text" />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6">
-            <labels>Session Name</labels>            
-            <input ng-model="name" placeholder="Name" type="text" />
-        </div>
-        <div class="col-xs-6">
-            <button class="btn btn-success" ng-click="postSession();">Post</button>
-        </div>
-    </div>-->
     <div class="graphCont">
         <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
         </canvas>
     </div>
     <div>
-        <button ng-click = "clearGraph()"class="btn">Clear</button>
+        <button ng-click="clearGraph()" class="btn">Clear</button>
     </div>
-    <div ng-model = "displayInGraph" ng-repeat="session in sessions">
-        <button  ng-click="showThis(session.id)"class="dataCard">
+    <div class="row">
+        <ul ng-model="displayInGraph" ng-repeat="session in sessions">
+            <li class="dataList col-xs-4">
+                <button ng-click="showThis(session.id)" class="dataCard">
             <p><strong>Session name: </strong> {{ session.name }}</p>
             <p><strong>Deck Studied: </strong> {{ session.deckName}}</p>
             <p><strong>Time spend Studying: </strong> {{ session.duration}}</p>
@@ -62,7 +18,7 @@
             <div class = "cardStat" ng-repeat=" result in session.results">
                 <div class ="cardDisp"><strong>{{ result.keyword }}</strong> {{ result.percentage}}%</div>
             </button>
-        </div>
-
+            </li>
+        </ul>
     </div>
 </div>

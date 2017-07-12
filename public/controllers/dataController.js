@@ -27,22 +27,21 @@ angular
                     $scope[newloc].push(tempArr);
                 }
                 function grabPropertyData(id, arr, prop, newloc) {
+                    console.log("this is my function id "+id)
                     for (var i = 0; i < arr.length; i++) {
-                        if (arr.id == id) {
+                        if (arr[i].id == id) {
+                            console.log("makes it here")
                             $scope[newloc].push(arr[i][prop]);
                         }
                     }
                 }
                 $scope.currentDeck = null;
                 $scope.showThis = function (id) {
-                    // if ($scope.currentSession == null) {
                     $scope.currentSession = id;
                 }
                 $scope.$watch('currentSession', function () {
                     grabPropertyData($scope.currentSession, $scope.sessions, "name", "series");
-
                     grabPropertyData($scope.currentSession, $scope.sessions[0].results, "keyword", "labels");
-
                     for (var i = 0; i < $scope.sessions.length; i++) {
                         if ($scope.sessions[i].id == $scope.currentSession) {
                             $scope.currentDeck = $scope.sessions[i].deckIDTested;
@@ -50,11 +49,7 @@ angular
                         }
                     }
                 })
-                // grabPropertyData($scope.currentSession, $scope.sessions, "name", "series");
-                // grabPropertyData($scope.sessions[0].results, "keyword", "labels");
-                // for (var i = 0; i < $scope.sessions.length; i++) {
-                //     grabPropertyPerc($scope.sessions[i].results, "percentage", "data");
-                // }
+          
                 $scope.$watch('displayOnGraph', function () {
                     console.log($scope.displayOnGraph);
                 })
