@@ -224,9 +224,11 @@ border-bottom: 8px solid black;
   width:100%;
   text-align: center;
   font-size: 30px;
+  word-wrap: break-word;
 }
-.indexCard > span{
- line-height: 11;
+.indexCard > p{
+ height:348px;
+ padding-top: 138px;
 }
 /*quiz page*/
 .quizCont{
@@ -326,7 +328,7 @@ border-bottom: 8px solid black;
 .quizHeader{
   background: #c5c6c4;
   height: 80px;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
 }
 .quizCenter{
   margin: 0 auto;
@@ -493,3 +495,4 @@ border-bottom: 8px solid black;
 .dataList{
   display: inline-block;
 }
+

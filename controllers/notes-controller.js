@@ -12,16 +12,6 @@ function Note(id, firstName, lastName, note, deckName) {
     this.keywords = [];
 }
 
-// function Note(id, firstName, lastName, note, deckName, kw) {
-//     this.postId = id;
-//     this.postedBy = firstName + " " + lastName;
-//     this.postedDate = this.postDate();
-//     this.postedTime = this.postTime();
-//     this.note = note;
-//     this.deckName = deckName || "Deck " + "#" + (this.postId + 1);
-//     this.keywords = kw ? kw : [];
-// }
-
 function Keyword(id, keyword, definition) {
     this.id = id;
     this.keyword = keyword;
@@ -57,7 +47,7 @@ Keyword.prototype.updateKeywordDefinition = function (input) {
 }
 //creating a note
 notes.push(new Note(noteID++, "Roger", "Chavez", "This is a test."));
-notes.push(new Note(noteID++, "Roger 1", "Chavez 1", "This is a test1."));
+notes.push(new Note(noteID++, "John", "Bianco", "A biome is a community or large ecological area on the earth's surface with plants and animals that have common characteristics for the environment with specific climatic conditions to suit the flora and fauna, they exist in and can be found over a range of continents. Biomes are distinct biological communities that have formed in response to a shared physical climate. 'Biome' is a broader term than 'habitat'; any biome can comprise a variety of habitats.", "biome"));
 //creating a keyword
 notes[0].addKeyword(keywordID++, "keyword 0", "Definition of the keyword 0.");
 notes[0].addKeyword(keywordID++, "keyword 1", "Definition of the keyword 1.");
@@ -67,12 +57,12 @@ notes[0].addKeyword(keywordID++, "keyword 4", "Definition of the keyword 4.");
 notes[0].addKeyword(keywordID++, "keyword 5", "Definition of the keyword 5.");
 
 
-notes[1].addKeyword(keywordID++, "keyword 6", "Definition of the keyword 6.");
-notes[1].addKeyword(keywordID++, "keyword 7", "Definition of the keyword 7.");
-notes[1].addKeyword(keywordID++, "keyword 8", "Definition of the keyword 8.");
-notes[1].addKeyword(keywordID++, "keyword 9", "Definition of the keyword 9.");
-notes[1].addKeyword(keywordID++, "keyword 10", "Definition of the keyword 10.");
-notes[1].addKeyword(keywordID++, "keyword 11", "Definition of the keyword 11.");
+notes[1].addKeyword(keywordID++, "Tundra", "tree growth is hindered by low temperatures and short growing seasons.");
+notes[1].addKeyword(keywordID++, "Taiga", " coniferous forests consisting mostly of pines, spruces and larches.");
+notes[1].addKeyword(keywordID++, "Deciduous Forest", "dominated by trees that lose their leaves each year. They are found in areas with warm moist summers and mild winters.");
+notes[1].addKeyword(keywordID++, "Grasslands", " areas where the vegetation is dominated by grasses.");
+notes[1].addKeyword(keywordID++, "Desert", "barren area of landscape where little precipitation occurs and consequently living conditions are hostile for plant and animal life.");
+notes[1].addKeyword(keywordID++, "Chaparral", "shrubland or heathland plant community found primarily in the U.S. state of California and in the northern portion of the Baja California Peninsula, Mexico");
 
 //GET
 function index(req, res, next) {
