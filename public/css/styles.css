@@ -12,14 +12,14 @@
 }
 .green{
   background:white;
-  line-height: 8;
   height:181px;
-  text-align: center;
-  color: black;
-  font-weight: lighter;
-  font-size: x-large;
   border:none;
-  white-space: nowrap;
+  padding: 70px;
+}
+.logoPic{
+  content: url("../images/logo.png");
+  height: 35px;
+  margin:0 auto;
 }
 .lightgreen{
   white-space: nowrap;

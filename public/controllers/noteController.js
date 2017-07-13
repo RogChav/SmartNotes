@@ -17,11 +17,11 @@ angular
 
     function getSpecificUserNotes(currentID) {
       $http.get('http://localhost:8080/notes/' + currentID)
-        .then(function( response) {
-        $scope.theseNotes = response.data.notes;
-         $scope.notesInput = $scope.theseNotes.note;
-            // $scope.currentID = $scope.notes[i].postId
-          });
+        .then(function (response) {
+          $scope.theseNotes = response.data.notes;
+          $scope.notesInput = $scope.theseNotes.note;
+          // $scope.currentID = $scope.notes[i].postId
+        });
     }
 
     $scope.$watch('singleSelect', function () {
@@ -31,7 +31,7 @@ angular
     $scope.$watch('currentID', function () {
       // console.log("this is running")
       // console.log($scope.currentID);
-      
+
       if ($scope.singleSelect != "") {
         $scope.deckNamed = true;
         $scope.nameTheDeck = false;
@@ -114,7 +114,6 @@ angular
           $scope.theseNotes = response.data;
         })
     }
-
     $scope.SubmitNewNote = function () {
       $http.post("http://localhost:8080/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName })
         .then(function (response) {
@@ -123,15 +122,14 @@ angular
           $scope.titleAndAuthor = response.data.note[response.data.note.length - 1].deckName + " by " + response.data.note[response.data.note.length - 1].postedBy;
           $scope.currentID = response.data.note[response.data.note.length - 1].postId;
           $scope.singleSelect = $scope.currentID;
-          $scope.notes.push(response.data.note[response.data.note.length-1]);
-      })
-      
+          $scope.notes.push(response.data.note[response.data.note.length - 1]);
+        })
       $scope.deckNamed = true;
       $scope.nameTheDeck = false;
     }
 
     function updateNotes() {
-      $http.put("http://localhost:8080/notes/" + $scope.currentID, {note: $scope.notesInput})
+      $http.put("http://localhost:8080/notes/" + $scope.currentID, { note: $scope.notesInput })
         .then(function (response) {
           // $scope.notesInput = response.data.note[$scope.currentID].note;
           console.log("These are my updated notes!");
@@ -172,5 +170,5 @@ angular
     $scope.postedBy = "";
     $scope.postedOn = "";
 
-});
+  });
 
