@@ -5,7 +5,7 @@ angular
         var postID = "";
         //Get
         this.getSessionData = function () {
-            return $http.get("http://localhost:8080/session");
+            return $http.get("/session");
         }
         // POST make an instance of a session 
         this.postSession = function (deckId, deckName, name) {
@@ -29,7 +29,6 @@ angular
         }
         //PUT uploading Results
         this.updateResults = function (thisPostId, id, keyword, correct, wrong) {
-            // console.log("logging: " + thisPostId)  
             $http.put("/session/" + thisPostId, { id: id, keyword: keyword, correct: correct, wrong: wrong })
                 // .then(function (response) {
                 //     console.log('This is my update results path');
