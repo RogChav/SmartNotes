@@ -3,7 +3,7 @@
 
 # Description
 
-SmartNotes is a web app that allows users to optimize their study time by combining note taking and flash cards. As you take notes you can easily mark keywords and either define them right then or define them later. You can then review and/or quiz yourself on these keywords and the app will also keep track of your quiz data and will display your data upon clicking on the session in the data page. Another convenient aspect of the app is that they're saved online, meaning if you had access to internet you can access them anywhere. 
+SmartNotes is a web app that allows users to optimize their study time by combining note taking and flash cards. As you take notes you can easily mark keywords and either define them right then or define them later. You can then review and/or quiz yourself on these keywords and the app will also keep track of your quiz data and will display your data upon clicking on the session in the data page. Another convenient aspect of the app is that they're saved online, meaning if you have access to internet you can access them anywhere. 
 
 <br>
 
@@ -70,6 +70,16 @@ SmartNotes is a web app that allows users to optimize their study time by combin
     percentage: 82
 } 
 ``` 
+
+## Result model
+|Parameters| Value| Description| Example|
+|----------|------|------------|--------|
+| Card id | Number| Stores the id of the keyword in a given study session.| 0 |
+| Keyword | String| Stores the name of the keyword used in a given study session.| "Constellation" |
+| Correct| number  	| Displays the number of times a student answered correctly. | 9|
+| Wrong | number  	| Displays the number of times a student answered wrong. | 2|
+| Total | number  	| Displays the total number of times a student answered. | 11|
+| Percentage | number  	| Displays a percentage, rounded to the nearest whole number, for the correct answers. | 82|
 
 <br>
 
