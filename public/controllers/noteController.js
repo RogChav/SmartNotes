@@ -115,7 +115,7 @@ angular
         })
     }
     $scope.SubmitNewNote = function () {
-      $http.post("http://localhost:8080/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName })
+      $http.post("/notes/", { firstName: $scope.firstName, lastName: $scope.lastName, note: "Please complete me!", deckName: $scope.deckName })
         .then(function (response) {
           // console.log("These are my new notes!");
           // console.log(response)
@@ -129,7 +129,7 @@ angular
     }
 
     function updateNotes() {
-      $http.put("http://localhost:8080/notes/" + $scope.currentID, { note: $scope.notesInput })
+      $http.put("/notes/" + $scope.currentID, { note: $scope.notesInput })
         .then(function (response) {
           // $scope.notesInput = response.data.note[$scope.currentID].note;
           console.log("These are my updated notes!");
@@ -138,7 +138,7 @@ angular
     }
 
     $scope.updateKeyword = function (keyword, definition) {
-      $http.put("notes/" + $scope.currentID + "/keyword", { keyword: keyword, definition: definition })
+      $http.put("/notes/" + $scope.currentID + "/keyword", { keyword: keyword, definition: definition })
         .then(function (response) {
           // console.log("These are my updated keywords!");
           // console.log(response.data)
