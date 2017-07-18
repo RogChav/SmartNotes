@@ -37,9 +37,9 @@ SmartNotes is a web app that allows users to optimize their study time by combin
 
 ```
 {
-    id: 1, 
-    keyword:"Example", 
-    definition: "A thing characteristic of its kind or illustrating a general rule." 
+    id: 777, 
+    keyword:"Newton's Third Law ", 
+    definition: "For every action, there is an equal and opposite reaction." 
 }
 ```
 
