@@ -37,60 +37,43 @@
 </head>
 
 <body ng-cloak>
-
-  <div class="row topbar">
-    <div class="green col-xs-4">
+<header>
+  <div class="topBar clearfix">
+    <div class="leftTopBar">
       <a ui-sref="home">
         <div class="logoPic"></div>
       </a>
     </div>
-    <div class="lightgreen col-xs-5">
-      <h1 class="lightgreen"><span>Note & Study</span></h1>
+    <div class="midTopBar">
+      <h1>Note & Study</h1>
     </div>
-    <div class="yellow col-xs-3">
-      <a class="yellow" ui-sref="home"><span>Sign In / Register</span></a>
+    <div class="rightTopBar">
+      <a ui-sref="home">Sign In / Register</a>
     </div>
   </div>
-  </div>
-  <div class="row naviBar">
+  <div class="naviBar">
     <ul>
-      <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="home">Home</button></li>
-      <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="notes"><span>Notes</span></button></li>
-      <li class="listItem col-xs-2 "><button ui-sref-active="active" ui-sref="deck"><span>Study Deck</span></button></li>
-      <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="quiz"><span>Quiz</span></button></li>
-      <li class="listItem col-xs-2"><button ui-sref-active="active" ui-sref="data"><span>Your Data</span></button></li>
-      <li class="listItem col-xs-2"><button  ui-sref="home"><span>Logout</span></button></li>
+      <li class="listItem"><button ui-sref-active="active" ui-sref="home">Home</button></li>
+      <li class="listItem"><button ui-sref-active="active" ui-sref="notes">Notes</button></li>
+      <li class="listItem"><button ui-sref-active="active" ui-sref="deck">Study Deck</button></li>
+      <li class="listItem"><button ui-sref-active="active" ui-sref="quiz">Quiz</button></li>
+      <li class="listItem"><button ui-sref-active="active" ui-sref="data">Your Data</button></li>
+      <li class="listItem"><button  ui-sref="home">Logout</button></li>
     </ul>
-  </div>
-  <!--https://connect.secure.wellsfargo.com/auth/logout?st=1499841396&SAMLart=AAQCQOoEQCR14WDgSxaU4QNGCHpGcoS1YGaHvVMVwgQdMwp9Jw%2FfZ7P%2BbHA%3D-->
-  <!--
-  <div class="test row">
-    <div class="col-xs-2"></div>
-    <div class="col-xs-2"></div>
-    <div class="col-xs-2"></div>
-    <ul class= "col-xs-2 testBar">
-      <li class=""><a href="#"><span>Icon Here</span></a></li>
-      <li class=""><a href="#"><span>Notes</span></a></li>
-      <li class=" "><a href="#"><span>Study Deck</span></a></li>
-      <li class=" "><a href="#"><span>Quiz</span></a></li>
-      <li class=""><a href="#"><span>Your Data</span></a></li>
-      <li class=""><a href="#"><span>Logout</span></a></li>
-    </ul>
-    <div class="col-xs-2"></div>
-    <div class="col-xs-2"></div>
-  </div>-->
-
+    </div>
+  </header>
+  
   <!--features > Smart notes- take notes and we'll help you segregate keypoint and vocabulary as you go you can review and quiz on the note cards whenever you'd like and you're learning progress is tracked so that you can optimize your study time and learn more efficiently. -->
   <div ui-view></div>
   <footer>
-    <div class="row naviBar">
+    <div class="naviBar">
       <ul>
-        <li class="listItem col-xs-2"><button><span>FAQ</span></button></li>
-        <li class="listItem col-xs-2"><button><span>Careers</span></button></li>
-        <li class="listItem col-xs-2"><button><span>SiteMap</span></button></li>
-        <li class="listItem col-xs-2"><button>Private Policy</button></li>
-        <li class="listItem col-xs-2"><button><span>Terms of Use</span></button></li>
-        <li class="listItem col-xs-2 "><button><span>Legal</span></button></li>
+        <li class="listItem"><button>FAQ</button></li>
+        <li class="listItem"><button>Careers</button></li>
+        <li class="listItem"><button>SiteMap</button></li>
+        <li class="listItem"><button>Private Policy</button></li>
+        <li class="listItem"><button>Terms of Use</button></li>
+        <li class="listItem "><button>Legal</button></li>
       </ul>
     </div>
   </footer>
@@ -108,5 +91,4 @@
   <script type="text/javascript" src="./controllers/homeController.js"></script>
   <script type="text/javascript" src="./controllers/quizController.js"></script>
 </body>
-
 </html>

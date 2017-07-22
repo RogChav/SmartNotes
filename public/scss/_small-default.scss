@@ -1,0 +1,105 @@
+//-------------------------- header ---------------------------
+header {
+    div.topBar {
+        width: 100%;
+        height: 60px;
+        background: yellow;
+        div.leftTopBar {
+            height: 60px;
+            width: 25%;
+            background-color: lightgreen;
+            float: left;
+            background: url(../images/logo.png);
+            background-repeat: no-repeat;
+            background-size: 75px;
+            background-position-x: center;
+            background-position-y: center;
+        }
+        div.midTopBar {
+            padding-top: 20px;
+            text-align: center;
+            height: 60px;
+            width: 50%;
+            background: lightblue;
+            float: left;
+            font-size: 0.8rem;
+        }
+        div.rightTopBar {
+            height: 60px;
+            width: 25%;
+            float: left;
+            font-size: .7rem;
+            text-align: center;
+            padding-top: 22px;
+            font-weight: 500;
+            background: lightcoral;
+            a {
+                color: black;
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+div.naviBar {
+    ul {
+        width: 100%;
+        display: inline-flex;
+        list-style: none;
+        li.listItem {
+            width: 16.66%;
+            height: 30px;
+            button {
+                border-radius: 0;
+                height: 30px;
+                width: 100%;
+                font-size: 0.4rem;
+                font-weight: 600;
+                padding: 5px;
+                background: lightcyan;
+                white-space: nowrap;
+                border: none;
+                border-right: 1px solid black;
+                outline: none;
+            }
+        }
+        li.listItem:last-child button {
+            border: none;
+        }
+    }
+}
+
+//----------------------------- home page ---------------------------
+div.userForm {
+    margin: 2%;
+    div.form-card {
+        p {
+            height: 40px;
+            background: gray;
+            text-align: center;
+            padding-top: 10px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            font-weight: 600;
+        }
+    }
+}
+
+div.marginForm {
+    div {
+        width: 100%;
+        text-align: center;
+        float: left;
+        input {
+            text-align: center;
+        }
+    }
+}
+
+.clearfix {
+    content: "";
+    clear: both;
+    display: table;
+}
